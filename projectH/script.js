@@ -62,7 +62,7 @@ btnRemoveLast.addEventListener("click", () => {
 });
 
 const deleteLast = () => {
-  const lastItem = document.querySelector(".task-item");
+  const lastItem = document.querySelector(".task__main");
   todoContainer.removeChild(lastItem);
 };
 
@@ -116,63 +116,55 @@ todoContainer.addEventListener("click", function (e) {
 
 //ready checked
 
-document.querySelector("#searching").oninput = function(){
-    let val = this.value.trim();
-    let arr = []
-        arr = document.getElementsByClassName('task__title')
-        for( i = 0; i <arr.length; i++){
-        for(k = 0; k<arr[i].innerHTML.length; k++){
-            if(!(arr[i].innerHTML.includes(val))){
-                if(val == ' '){
-                    arr[i].parentNode.parentNode.classList.remove('display__none')
-                }
-                arr[i].parentNode.parentNode.classList.add('display__none')
-            }
-            else{
-                arr[i].parentNode.parentNode.classList.remove('display__none')
-            }
+document.querySelector("#searching").oninput = function () {
+  let val = this.value.trim();
+  let arr = [];
+  arr = document.getElementsByClassName("task__title");
+  for (i = 0; i < arr.length; i++) {
+    for (k = 0; k < arr[i].innerHTML.length; k++) {
+      if (!arr[i].innerHTML.includes(val)) {
+        if (val == " ") {
+          arr[i].parentNode.parentNode.classList.remove("display__none");
         }
+        arr[i].parentNode.parentNode.classList.add("display__none");
+      } else {
+        arr[i].parentNode.parentNode.classList.remove("display__none");
+      }
     }
-}
+  }
+};
 
 //filter ready
 
-const btnShowComplete = document.getElementById('show-complete')
+const btnShowComplete = document.getElementById("show-complete");
 
-const showOnlyCompleted = function(){
-
-    arr = document.querySelectorAll('.complete-label')
-    console.log(arr);
-    for(i = 0; i<arr.length; i++){
-    if(arr[i].classList.contains('complete-label-active')){ 
-
+const showOnlyCompleted = function () {
+  let arr = document.querySelectorAll(".complete-label");
+  arr.forEach((i) => {
+    if (i.classList.contains("complete-label-active")) {
+    } else if (!i.classList.contains("complete-label-active")) {
+      i.parentNode.parentNode.classList.add("display__none");
     }
-    else if(!(arr[i].classList.contains('complete-label-active'))){
-        arr[i].parentNode.parentNode.classList.add('display__none')
-    }
+  });
+};
 
-}
-}
+btnShowComplete.onclick = () => {
+  showOnlyCompleted();
+};
 
-    btnShowComplete.onclick = ()=>{
-        showOnlyCompleted()
-    }
+//showOnlyComplete ready
 
+const btnShowAll = document.getElementById("show-all");
 
-    //showOnlyComplete ready
+const showAll = function () {
+  let arr = document.querySelectorAll(".complete-label");
+  arr.forEach((i) => {
+    i.parentNode.parentNode.classList.remove("display__none");
+  });
+};
 
-const btnShowAll = document.getElementById('show-all')
-
-    const showAll = function(){
-       let arr = document.querySelectorAll('.complete-label')
-    console.log(arr);
-    for(i = 0; i<arr.length; i++){
-        arr[i].parentNode.parentNode.classList.remove('display__none')
-    }
-}
-
-btnShowAll.onclick = ()=>{
-    showAll()
-}
+btnShowAll.onclick = () => {
+  showAll();
+};
 
 //showAll ready
